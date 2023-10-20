@@ -11,7 +11,7 @@
 ### Association
 
 - has_many :tweets
-- has_many :pictures
+- has_many :posts
 
 
 ## tweets テーブル
@@ -26,7 +26,7 @@
 - belongs_to :user
 
 
-## pictures テーブル
+## posts テーブル
 
 | Column    | Type       | Options                        |
 | ------    | ---------- | ------------------------------ |
@@ -37,7 +37,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :pictur
+- belongs_to :post
   belongs_to :comment
 
 ## comments テーブル
@@ -50,4 +50,4 @@
 
 ### Association
 
-- belongs_to :pictur
+- belongs_to :post
