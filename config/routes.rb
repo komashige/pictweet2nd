@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'posts/index'
   devise_for :users
-  root to: 'tweets#index'
+  root to: 'posts#index'
   resources :tweets do
     resources :comments, only: :create
     collection do

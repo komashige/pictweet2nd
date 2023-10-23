@@ -1,6 +1,6 @@
-<!doctype html>
+
 <html lang="en" data-bs-theme="auto">
-  <head><script src="../assets/js/color-modes.js"></script>
+  <head><script src=""></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +8,14 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.112.5">
     <title>Album example · Bootstrap v5.3</title>
-    <link rel="stylesheet" href="custom.css">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link rel="stylesheet" href="">
+    <link rel="canonical" href="">
 
     
 
     
 
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -174,29 +174,39 @@
 </header>
 
 <main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="text-primary display-1 ">いらすと</h1>
-        <h1 class="text-warning display-1">あるばむ</h1>
-        <p class="lead text-body-black-50">このコレクションでは、中身や制作者についてわかりやすくお伝えしようと思いました。そして、ほんのり可愛らしい要素もちりばめてみましたよ。
-        </p>
-        <p>
-          <a href="#" class="btn btn-primary btn-lg">ログイン</a>
-          <a href="#" class="btn btn-success btn-lg">新規登録</a>
-        </p>
+  
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="text-primary display-1 ">いらすと</h1>
+          <h1 class="text-warning display-1">あるばむ</h1>
+          <p class="lead text-body-black-50">このコレクションでは、中身や制作者についてわかりやすくお伝えしようと思いました。そして、ほんのり可愛らしい要素もちりばめてみましたよ。
+          </p>
+          <p>
+            <%# <a href="#" class="btn btn-primary btn-lg">ログイン</a>
+            <a href="#" class="btn btn-success btn-lg">新規登録</a> %>
+          </p>
+          <% if user_signed_in? %>
+            <div class="user_nav grid-6">
+              <%= link_to "ログアウト", destroy_user_session_path, class: "btn btn-danger btn-lg", data: { turbo_method: :delete } %>
+              <%= link_to "おえかきする", new_tweet_path, class: "btn btn-warning btn-lg" %>
+            </div>
+          <% else %>
+            <div class="grid-6">
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary btn-lg" %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success btn-lg" %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    </section>
+  
+    <div class="album py-5 bg-body-tertiary">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ちょっと待っててねー</text></svg>
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">ちょっと待っててねー</text></svg>
             <div class="card-body">
               <p class="card-text">ユーザーコメント</p>
               <div class="d-flex justify-content-between align-items-center">
@@ -333,8 +343,7 @@
         </div>
       </div>
     </div>
-  </div>
-
+ 
 </main>
 
 <footer class="text-body-secondary py-5">
@@ -346,8 +355,8 @@
     <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src=""></script>
 
     </body>
-</html>
+
 

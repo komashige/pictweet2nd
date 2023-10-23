@@ -9,8 +9,12 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
   end
   def create
-    Tweet.create(tweet_params)
-    redirect_to '/'
+    @tweet = Tweet.new(tweet_params)
+    if @tweet.save
+      redirect_to '/'
+    else
+      render :new
+    end
   end
   
   def destroy

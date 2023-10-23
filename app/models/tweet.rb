@@ -1,6 +1,7 @@
 class Tweet < ApplicationRecord
   belongs_to :user
   has_many :comments  # commentsテーブルとのアソシエーション
+  has_one_attached :image
 
   def self.search(search)
     if search != ""
@@ -9,5 +10,12 @@ class Tweet < ApplicationRecord
       Tweet.all
     end
   end
+
+  validates :content, presence: true, length: { maximum: 280 }
+
+  def was_attached?
+    self.image.attached?
+  end
+
 end
 

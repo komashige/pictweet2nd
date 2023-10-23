@@ -1,0 +1,35 @@
+<h1>ブラウザで描画</h1>
+
+<canvas id="drawingCanvas" width="400" height="400"></canvas>
+
+<script>
+  // Canvas要素を取得
+  const canvas = document.getElementById('drawingCanvas');
+  const context = canvas.getContext('2d');
+
+  // 描画のロジックをここに追加
+ 
+<div id="toolbar">
+  <button id="penTool">ペン</button>
+  <button id="eraserTool">消しゴム</button>
+</div>
+  // 例：マウスで描画する場合のコード
+  <canvas id="drawingCanvas" width="800" height="600"></canvas>
+
+  // マウスのイベントハンドラを追加
+  let isDrawing = false;
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    context.beginPath();
+    context.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+  });
+  canvas.addEventListener('mousemove', (e) => {
+    if (isDrawing) {
+      context.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+      context.stroke();
+    }
+  });
+  canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+  });
+</script>
