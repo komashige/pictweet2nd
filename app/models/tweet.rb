@@ -11,7 +11,7 @@ class Tweet < ApplicationRecord
     end
   end
 
-  validates :content, presence: true, length: { maximum: 280 }
+  validates :text, presence: true, length: { maximum: 280 }
 
   def was_attached?
     self.image.attached?

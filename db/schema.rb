@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_21_115511) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_080850) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_115511) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "content"
+    t.text "canvas_data"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|

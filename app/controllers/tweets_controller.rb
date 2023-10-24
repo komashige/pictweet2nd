@@ -14,8 +14,12 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to '/'
     else
+      puts @tweet.errors.full_messages 
       render :new
     end
+  end
+
+  def draw
   end
   
   def destroy
@@ -44,7 +48,7 @@ class TweetsController < ApplicationController
   
   private
   def tweet_params
-    params.require(:tweet).permit(:image, :text).merge(user_id: current_user.id)
+    params.require(:tweet).permit(:image, :text, :canvas_data).merge(user_id: current_user.id)
   end
 
   def set_tweet

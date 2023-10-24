@@ -27,8 +27,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
-  
+
+    // 保存ボタンのクリックイベント
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault(); // デフォルトのフォーム送信を停止
+
+      // Canvasのデータを取得
+      const drawingData = canvas.toDataURL();
+
+      // hidden inputを作成して、フォームに追加
+      const hiddenInput = document.createElement('input');
+      hiddenInput.setAttribute('type', 'hidden');
+      hiddenInput.setAttribute('name', 'tweet[drawing_data]');
+      hiddenInput.setAttribute('value', drawingData);
+      e.target.appendChild(hiddenInput);
+
+      // フォームを再度送信
+      e.target.submit();
     // 描画の制約を追加
     // ...
-  });
-  
+    });
+});  
