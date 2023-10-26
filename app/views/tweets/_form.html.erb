@@ -45,7 +45,7 @@
             gap: 10px;            /* ボタン間の隙間を設定 */
         }
   
-        #penTool, #eraserTool {
+        #penTool, #eraserTool, #memoTool {
             /* 共通のスタイルはこちらに */
             font-size: 20px; 
             padding: 10px 20px; 
@@ -64,6 +64,11 @@
         #eraserTool {
              background: linear-gradient(lightyellow, #f39800);
             color: black;
+        }
+
+        #memoTool {
+            background: linear-gradient(lightgreen, darkgreen);
+            color: white;
         }
 
         /* 枠線のスタイルを調整 */
@@ -92,7 +97,6 @@
 
         /* 画面全体に対するスタイルを調整 */
         body, html {
-            background: linear-gradient(#FFFFDD,#EDEA45);
             margin: 0;
             padding: 0;
             height: 100%;
@@ -107,6 +111,7 @@
     <div id="toolbar">
         <button id="penTool">ペン</button>
         <button id="eraserTool">消しゴム</button>
+        <button id="memoTool">メモ</button>
     </div>
 
     <!-- キャンバスを囲む枠線のdiv要素を追加 -->
@@ -134,9 +139,50 @@
             drawingTool = 'eraser';
         });
 
+        let isMemoLinesVisible = false;  // メモの罫線が表示されているかどうかのフラグ
+        const backupCanvas = document.createElement('canvas');  // オフスクリーンキャンバスの作成
+        backupCanvas.width = canvas.width;
+        backupCanvas.height = canvas.height;
+        const backupContext = backupCanvas.getContext('2d');
+
+        document.getElementById('memoTool').addEventListener('click', () => {
+            drawingTool = 'none'; 
+
+            if (isMemoLinesVisible) {
+                // 罫線が表示されている場合、非表示にする
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(backupCanvas, 0, 0);
+                isMemoLinesVisible = false;
+            } else {
+                // 罫線が非表示の場合、表示する
+                // 現在のキャンバスの内容をバックアップ
+                backupContext.clearRect(0, 0, backupCanvas.width, backupCanvas.height);
+                backupContext.drawImage(canvas, 0, 0);
+
+                context.drawImage(backupCanvas, 0, 0);
+                drawMemoLines();
+                isMemoLinesVisible = true;
+            }
+        });
+
+        function drawMemoLines() {
+           
+            const dpi = window.devicePixelRatio * 96;
+            const cmToPixels = dpi / 1.5;
+
+            for(let y = cmToPixels; y < canvas.height; y += cmToPixels) {
+                context.beginPath();
+                context.moveTo(0, y);
+                context.lineTo(canvas.width, y);
+                context.strokeStyle = '#ddd';
+                context.stroke();
+            }
+        }
+
         // マウスのイベントハンドラを追加
         let isDrawing = false;
         canvas.addEventListener('mousedown', (e) => {
+            if (drawingTool !== 'pen' && drawingTool !== 'eraser') return;  // ここを追加
             isDrawing = true;
             context.beginPath();
             context.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);

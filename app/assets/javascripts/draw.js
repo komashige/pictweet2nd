@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Canvasのデータを取得
       const drawingData = fabricCanvas.toDataURL();
+      // hidden inputにCanvasのデータを設定
+      document.getElementById('canvasDataField').value = drawingData;
 
       // hidden inputを作成して、フォームに追加
       const hiddenInput = document.createElement('input');

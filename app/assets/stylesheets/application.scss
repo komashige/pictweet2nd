@@ -1,20 +1,26 @@
-@import "bootstrap";
-// /*
-//  * This is a manifest file that'll be compiled into application.css, which will include all the files
-//  * listed below.
-//  *
-//  * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
-//  * vendor/assets/stylesheets directory can be referenced here using a relative path.
-//  *
-//  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
-//  * compiled file so the styles you add here take precedence over styles defined in any other CSS
-//  * files in this directory. Styles in this file should be added after the last require_* statement.
-//  * It is generally better to create a new file per style scope.
-//  *
-//  *= require_tree .
-//  *= require_self
-//  */
-
-body {
-  background: linear-gradient(#FFFFDD,#EDEA45);
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: image-url('/assets/IMG_3482.jpeg');
+  background-repeat: no-repeat; /* 背景画像の繰り返しを阻止 */
+  background-size: cover; /* 背景画像を全画面に合わせる */
+  background-position: center center;
+  background-attachment: fixed; /* 画像を固定 */
+  height: 100vh; /* 画面の高さに合わせる */
+  margin: 0; /* 余白を削除 */
+  padding: 0; /* 余白を削除 */
+  opacity: 0.3; /* 透明度を調整 */
+  z-index: -1; /* 背景レイヤーとして配置 */
 }
+
+//背景画面
+body {
+  position: relative; /* 追加 */
+ 
+}
+
+@import "bootstrap";
