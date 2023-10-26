@@ -1,27 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Canvas要素を取得
-  const canvas = new fabric.Canvas('drawingCanvas');
+  const fabricCanvas = new fabric.Canvas('drawingCanvas');
   let isDrawing = false;
 
   // ペンツールボタンのクリックハンドラ
   document.getElementById('penTool').addEventListener('click', () => {
     isDrawing = true;
-    canvas.isDrawingMode = true;
-    canvas.freeDrawingBrush.color = 'red'; // 線の色
-    canvas.freeDrawingBrush.width = 5;    // 線の太さ
+    fabricCanvas.isDrawingMode = true;
+    fabricCanvas.freeDrawingBrush.color = 'red'; // 線の色
+    fabricCanvas.freeDrawingBrush.width = 5;    // 線の太さ
   });
 
     // 消しゴムボタンのクリックハンドラ
     document.getElementById('eraserTool').addEventListener('click', () => {
       isDrawing = false;
-      canvas.isDrawingMode = false;
+      fabricCanvas.isDrawingMode = false;
     });
   
     // マウスがCanvasの範囲内にあるかどうかを確認
-    canvas.on('mouse:down', (event) => {
+    fabricCanvas.on('mouse:down', (event) => {
       if (isDrawing) {
-        const pointer = canvas.getPointer(event.e);
-        if (pointer.x >= 0 && pointer.x <= canvas.width && pointer.y >= 0 && pointer.y <= canvas.height) {
+        const pointer = fabricCanvas.getPointer(event.e);
+        if (pointer.x >= 0 && pointer.x <= fabricCanvas.width && pointer.y >= 0 && pointer.y <= fabricCanvas.height) {
           // マウスがCanvasの範囲内にある場合、描画を許可
           // 以下、描画処理を追加
         }
@@ -33,12 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault(); // デフォルトのフォーム送信を停止
 
       // Canvasのデータを取得
-      const drawingData = canvas.toDataURL();
+      const drawingData = fabricCanvas.toDataURL();
 
       // hidden inputを作成して、フォームに追加
       const hiddenInput = document.createElement('input');
       hiddenInput.setAttribute('type', 'hidden');
-      hiddenInput.setAttribute('name', 'tweet[drawing_data]');
+      hiddenInput.setAttribute('name', 'tweet[canvas_data]');
       hiddenInput.setAttribute('value', drawingData);
       e.target.appendChild(hiddenInput);
 

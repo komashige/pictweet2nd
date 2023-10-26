@@ -1,35 +1,90 @@
-<div class="contents row">
-  <div class="container">
-    <h2>Sign up</h2>
-    <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body { 
+        background: linear-gradient(#FFFFDD,#EDEA45);
+    } 
+    h1 {
+      text-align: center;             /* タイトルを中央に配置 */
+      color: #333;                    /* 文字の色を暗い灰色に変更 */
+      font-family: 'Georgia', serif;  /* フォントの種類をGeorgiaに変更 */
+      margin-top: 50px;               /* 上側の間隔を50pxに設定 */
+      margin-bottom: 60px;            /* h1とツールバーとの間のスペースを設定 */
+        }
 
-      <div class="field">
-        <%= f.label :nickname %> <em>(6 characters maximum)</em><br />
-        <%= f.text_field :nickname, autofocus: true, maxlength: "6" %>
-      </div>
+   .input-style {
+      border: 5px solid green;  /* 枠線を緑色に */
+      border-radius: 5px;      /* 角を少し丸く */
+      padding: 5px;            /* 内側の余白を追加 */
+      font-size: 16px;         /* テキストのサイズを指定 */
+      width: 50%;             /* 幅を最大に */
+    }
+    .contents.row {
+      display: flex;        /* フレックスボックスを有効にする */
+      justify-content: center; /* 水平方向の中央に配置 */
+      align-items: flex-start; /* 垂直方向の上部に配置 */
+      height: 100vh;        /* ブラウザのビューポートの高さを100%とする */
+    }
 
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email %>
-      </div>
+    .container {
+      width: 100%;          /* コンテンツの幅を最大化する */
+      text-align: center;
+      max-width: 600px;     /* 最大の幅を指定して、レスポンシブなデザインを実現する */
+    }
 
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-        <% end %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
-      </div>
+    .actions input[type="submit"] {
+      background-color: #4CAF50; /* ボタンの背景色 */
+      color: white;              /* ボタンのテキスト色 */
+      padding: 10px 20px;        /* ボタンのパディング */
+      border: none;              /* ボーダーを非表示に */
+      border-radius: 5px;        /* ボタンの角を丸くする */
+      cursor: pointer;           /* マウスカーソルをポインタに */
+      font-size: 16px;           /* テキストのサイズ */
+      margin-top: 50px;               /* 上側の間隔を50pxに設定 */
+    }
 
-      <div class="field">
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
+     /* ボタンにマウスをホバーしたときのスタイル */
+    .actions input[type="submit"]:hover {
+      background-color: #45a049; /* ボタンの背景色を少し暗く */
+    }
+    </style>
+</head>
+<body>
+  <div class="contents row">
+    <div class="container">
+      <h1>新規登録するよ〜</h1>
+      <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="actions">
-        <%= f.submit "Sign up" %>
-      </div>
-    <% end %>
+        <div class="field">
+          <%= f.label :nickname %> <em>(6 characters maximum)</em><br />
+          <%= f.text_field :nickname, autofocus: true, maxlength: "6", class: 'input-style' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, class: 'input-style' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", class: 'input-style' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'input-style' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "登録するよ〜" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+</body>
+</html>

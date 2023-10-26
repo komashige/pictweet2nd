@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src=""></script>
+  <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,16 +8,18 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.112.5">
     <title>Album example · Bootstrap v5.3</title>
-    <link rel="stylesheet" href="">
-    <link rel="canonical" href="">
-
-    
-
-    
-
-<link href="" rel="stylesheet">
 
     <style>
+      body {
+         background: linear-gradient(#FFFFDD,#EDEA45);
+      } 
+
+      h1.display-1 {
+        -webkit-text-stroke-width: 2px;  /* 縁取りの太さ */
+        -webkit-text-stroke-color: grey; /* 縁取りの色 */
+        font-weight: 700;  /* 文字の太さを700にする */
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -180,7 +182,7 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="text-primary display-1 ">いらすと</h1>
           <h1 class="text-warning display-1">あるばむ</h1>
-          <p class="lead text-body-black-50">このコレクションでは、中身や制作者についてわかりやすくお伝えしようと思いました。そして、ほんのり可愛らしい要素もちりばめてみましたよ。
+          <p class="lead text-body-black-50">自分の好きなイラストを描いたとに保存でき、アルバムのように一覧でみることができるツールです。使い方はそれ以外にもありそう！？
           </p>
           <p>
             <%# <a href="#" class="btn btn-primary btn-lg">ログイン</a>
@@ -212,8 +214,8 @@
                   <p class="card-text">NieR:Automataの主人公の一人 2B</p>             
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                     
                     </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>              
@@ -227,8 +229,8 @@
                 <p class="card-text">練習してみました〜これからうまくなるのかなぁ、、、</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                   
                   </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>
@@ -242,8 +244,8 @@
                 <p class="card-text">kimetuno yaiba tannjiro_nezuko</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                    
                   </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>
@@ -253,13 +255,13 @@
 
           <div class="col">
             <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <img src="/rei 1.jpg" class="card-img-top" width="100%" height="225" alt="森" class="img-fluid">
               <div class="card-body">
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                    
                   </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>
@@ -268,13 +270,13 @@
           </div>
           <div class="col">
             <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <img src="/rei 6.jpg" class="card-img-top" width="100%" height="225" alt="森" class="img-fluid">
               <div class="card-body">
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                    
                   </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>
@@ -283,13 +285,13 @@
           </div>
           <div class="col">
             <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <img src="/asuka 3.jpg" class="card-img-top" width="100%" height="225" alt="森" class="img-fluid">
               <div class="card-body">
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
+                    
                   </div>
                   <small class="text-body-secondary">9 mins</small>
                 </div>
