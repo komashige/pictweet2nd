@@ -201,6 +201,13 @@
         canvas.addEventListener('mouseup', () => {
             isDrawing = false;
         });
+
+        const dataURL = canvas.toDataURL("image/png");
+        document.querySelector('form').addEventListener('submit', (e) => {
+            const canvasDataField = document.getElementById('canvasDataField');
+            canvasDataField.value = canvas.toDataURL("image/png");
+        });
+
     </script>
 
 
