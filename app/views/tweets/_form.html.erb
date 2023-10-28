@@ -211,7 +211,7 @@
     </script>
 
 
-    <%= form_with(model: tweet, local: true) do |form| %>
+    <%= form_with(model: tweet, data: { turbo: false }, local: true) do |form| %>
       <%= form.hidden_field :canvas_data, id: "canvasDataField" %>
       <%= form.text_area :text, placeholder: "コメントしてね〜", rows: "10" %>
       <%= form.submit "保存するよ〜" %>

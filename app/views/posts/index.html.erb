@@ -205,24 +205,39 @@
   
     <div class="album py-5 bg-body-tertiary">
       <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-                  <div class="card-img-top" >
-                    <img src="YOUR_DATA_URL_HERE" alt="Canvas Drawing" >
-               
-                    <div class="card-body d-flex justify-content-between">
-                      <p class="card-text">NieR:Automataの主人公の一人 2B</p>             
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">詳細ページ</button>
-                        </div>
-                          
-                      </div>
-                    </div>              
-                  </div>      
+       <%#= render partial: "header" %>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @tweets.each do |tweet| %>
+      <div class="col">
+        <div class="card h-100">
+          <%= image_tag(tweet.image) if tweet.image %>
+          <div class="card-body">
+            <!-- <h3 class="card-title text-center"><%= tweet.title %></h3> -->
+            <p class="card-text text-center"><%= tweet.text %></p>
+            <div class="btn-group">
+              <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                詳細ページ
+              </button>
+              <ul class="dropdown-menu">
+                <div class="text-center">
+                  
+                </div>
+                <div class="text-center">
+                  <li><a class="dropdown-item" href="#"><%= "text" %> <%= link_to "編集", tweet_path(tweet.id) %></a></li>
+                </div>
+              </ul>
             </div>
           </div>
+          <div class="card-footer">
+            <small class="text-body-secondary"><%= tweet.created_at %></small>
+            
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
           <div class="col">
             <div class="card shadow-sm">
               <img src="/2021 3.5 練習１.png" class="card-img-top" width="100%" height="225" alt="森" class="img-fluid">
