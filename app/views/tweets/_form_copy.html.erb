@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>    
+
+  <head>
+    <%# <title>ブラウザで描画</title> %>
+    <style>
+        
+          /* text_areaのスタイル */
+        textarea {
+            border: 10px solid green;  /* 枠線を緑色に */
+            border-radius: 5px;      /* 角を少し丸く */
+            padding: 5px;            /* 内側の余白を追加 */
+            font-size: 16px;         /* テキストのサイズを指定 */
+            width: 30%;             /* 幅を最大に */
+        }
+
+        /* 送信ボタンのスタイル */
+        input[type="submit"] {
+            background: linear-gradient(pink, red);  /* 背景色を青に */
+            color: white;            /* 文字色を白に */
+            border: none;            /* 枠線をなくす */
+            border-radius: 5px;      /* 角を少し丸く */
+            padding: 10px 15px;      /* 内側の余白を追加 */
+            font-size: 18px;         /* フォントサイズを指定 */
+            cursor: pointer;         /* ホバー時のカーソルを手の形に */
+            transition: background-color 0.3s;  /* 背景色の変化を滑らかに */
+        }
+
+        /* 送信ボタンをホバーしたときのスタイル */
+        input[type="submit"]:hover {
+            background-color: darkblue; /* 背景色を濃い青に */
+        }
+
+        h1 {
+            text-align: center;             /* タイトルを中央に配置 */
+            color: #333;                    /* 文字の色を暗い灰色に変更 */
+            font-family: 'Georgia', serif;  /* フォントの種類をGeorgiaに変更 */
+            margin-top: 50px;               /* 上側の間隔を50pxに設定 */
+            margin-bottom: 20px;            /* h1とツールバーとの間のスペースを設定 */
+        }
+        #toolbar {          
+            display: flex;        /* Flexboxを有効化 */
+            justify-content: center; /* 子要素を水平方向の中央に配置 */
+            width: 100vw;         /* コンテナの幅をビューポートの100%に設定 */  
+            gap: 10px;            /* ボタン間の隙間を設定 */
+        }
+  
+        #penTool, #eraserTool, #memoTool {
+            /* 共通のスタイルはこちらに */
+            font-size: 20px; 
+            padding: 10px 20px; 
+            border: 2px solid blue; 
+            border-radius: 5px; 
+            width: 150px; 
+            height: 50px; 
+            font-weight: bold;
+        }
+
+        #penTool {
+            background: linear-gradient(lightblue, darkblue);
+            color: white;
+        }
+
+        #eraserTool {
+             background: linear-gradient(lightyellow, #f39800);
+            color: black;
+        }
+
+        #memoTool {
+            background: linear-gradient(lightgreen, darkgreen);
+            color: white;
+        }
+
+        /* 枠線のスタイルを調整 */
+        .canvas-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+         
+        }
+         /* フォームのスタイルを調整 */
+        form {
+            text-align: center;
+            margin-top: 0px; /* フォームとボタンの間のスペースを設定 */
+        }
+       
+
+         /* キャンバスを中央に配置するスタイル */
+        #drawingCanvas {
+            background-color: white;
+            display: block;
+            border: 20px solid green; /* 枠線の色を緑色にする */
+            border-radius: 10px; /* 枠線の角をより丸める */
+            margin: 20px; /* ボタンとの間に隙間を作成 */
+            align-items: center;
+        }
+
+        /* 画面全体に対するスタイルを調整 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>ブラウザでお絵描きしよ〜</h1>
+
+    <div id="toolbar">
+        <button id="penTool">ペン</button>
+        <button id="eraserTool">消しゴム</button>
+        <button id="memoTool">メモ</button>
+    </div>
+
+    <!-- キャンバスを囲む枠線のdiv要素を追加 -->
+    <div class="canvas-container">
+        <canvas id="drawingCanvas" width="1000" height="800"></canvas>
+    </div>
+     
+
+    <script>
+        // Canvas要素を取得
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        context.lineWidth = 2; // 線の太さ
+
+        // 描画ツールの初期設定
+        let drawingTool = 'pen'; // 初期はペン
+
+        // ペンツールボタンのクリックイベント
+        document.getElementById('penTool').addEventListener('click', () => {
+            drawingTool = 'pen';
+        });
+
+        // 消しゴムツールボタンのクリックイベント
+        document.getElementById('eraserTool').addEventListener('click', () => {
+            drawingTool = 'eraser';
+        });
+
+        let isMemoLinesVisible = false;  // メモの罫線が表示されているかどうかのフラグ
+        const backupCanvas = document.createElement('canvas');  // オフスクリーンキャンバスの作成
+        backupCanvas.width = canvas.width;
+        backupCanvas.height = canvas.height;
+        const backupContext = backupCanvas.getContext('2d');
+
+        document.getElementById('memoTool').addEventListener('click', () => {
+            drawingTool = 'none'; 
+
+            if (isMemoLinesVisible) {
+                // 罫線が表示されている場合、非表示にする
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(backupCanvas, 0, 0);
+                isMemoLinesVisible = false;
+            } else {
+                // 罫線が非表示の場合、表示する
+                // 現在のキャンバスの内容をバックアップ
+                backupContext.clearRect(0, 0, backupCanvas.width, backupCanvas.height);
+                backupContext.drawImage(canvas, 0, 0);
+
+                context.drawImage(backupCanvas, 0, 0);
+                drawMemoLines();
+                isMemoLinesVisible = true;
+            }
+        });
+
+        function drawMemoLines() {
+           
+            const dpi = window.devicePixelRatio * 96;
+            const cmToPixels = dpi / 1.5;
+
+            for(let y = cmToPixels; y < canvas.height; y += cmToPixels) {
+                context.beginPath();
+                context.moveTo(0, y);
+                context.lineTo(canvas.width, y);
+                context.strokeStyle = '#ddd';
+                context.stroke();
+            }
+        }
+
+        // 編集画面での再描画 //
+        const image = new Image();
+        image.src = "<%= tweet.canvas_data %>"; // 保存したcanvas_dataを取得
+        image.onload = () => {
+        context.drawImage(image, 0, 0);  // キャンバスに再描画
+        };
+
+        // マウスのイベントハンドラを追加
+        let isDrawing = false;
+        canvas.addEventListener('mousedown', (e) => {
+            if (drawingTool !== 'pen' && drawingTool !== 'eraser') return;  // ここを追加
+            isDrawing = true;
+            context.beginPath();
+            context.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        });
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawing) {
+                if (drawingTool === 'pen') {
+                    context.strokeStyle = 'black'; // ペンの色
+                } else if (drawingTool === 'eraser') {
+                    context.strokeStyle = 'white'; // 消しゴムは白色で塗りつぶす
+                }
+                context.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+                context.stroke();
+            }
+        });
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+        });
+
+       
+        document.querySelector('form').addEventListener('submit', (e) => {
+            const canvasDataField = document.getElementById('canvasDataField');
+            canvasDataField.value = canvas.toDataURL("image/png");
+        });
+
+    </script>
+
+
+    <%= form_with(model: tweet, data: { turbo: false }, local: true) do |form| %>
+      <%= form.hidden_field :canvas_data, id: "canvasDataField" %>
+      <%= form.text_area :text, placeholder: "コメントしてね〜", rows: "10" %>
+      <%= form.submit "保存するよ〜" %>
+    <% end %>
+  </body>
+</html>

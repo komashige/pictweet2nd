@@ -1,16 +1,78 @@
-<div class="contents row">
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .contents {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;  /* 画面の80%を利用するとした場合 */
+    }
+
+    .container {
+        margin-top: 20px;  /* コメント部分との間に少しスペースをとる */
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        text-decoration: none; /* リンクの下線を消去 */
+        margin: 5px; /* ボタン同士の間隔を追加 */
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.85; /* ホバー時に透明度を変更して、ボタンがクリックできることを示す */
+    }
+
+
+    </style>
+</head>
+
+<body>
+
   <div class="content_post" style="background-image: url(<%= @tweet.image %>);">
     <% if user_signed_in? && current_user.id == @tweet.user_id %>
       <div class="more">
-        <span><%= image_tag 'arrow_top.png' %></span>
+      
         <ul class="more_list">
           <li>
-            <%= link_to '編集', edit_tweet_path(@tweet.id) %>
+            <%= link_to '編集', edit_tweet_path(@tweet.id), class: 'btn btn-primary' %>
           </li>
           <li>
-            <%= link_to '削除', tweet_path(@tweet.id), data: { turbo_method: :delete } %>
+            <%= link_to '削除', tweet_path(@tweet.id), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
           </li>
         </ul>
+
       </div>
     <% end %>
     <p><%= @tweet.text %></p>
@@ -27,7 +89,7 @@
         <%= form.submit "SEND" %>
       <% end %>
     <% else %>
-      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p>
+      <strong><p>※※※ おえかきの保存や編集は新規登録/ログインが必要です ※※※</p>
       </strong>
     <% end %>
     <div class="comments">
@@ -41,3 +103,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>
