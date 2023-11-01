@@ -116,7 +116,7 @@
 
     <!-- キャンバスを囲む枠線のdiv要素を追加 -->
     <div class="canvas-container">
-        <canvas id="drawingCanvas" width="1000" height="800"></canvas>
+        <canvas id="drawingCanvas" contenteditable="true" width="1000" height="1000"></canvas>
     </div>
      
 
@@ -198,14 +198,43 @@
                 context.stroke();
             }
         });
+
+        document.addEventListener('paste', function (e) {
+            // クリップボードからアイテムを取得
+            const items = (e.clipboardData || window.clipboardData).items;
+            for (let index in items) {
+                const item = items[index];
+                if (item.kind === 'file' && item.type.match(/^image\//)) {
+                    const blob = item.getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = function(event){
+                        const img = new Image();
+                        img.onload = function(){
+                            context.drawImage(img, 0, 0, canvas.width, canvas.height); 
+                        };
+                        img.src = event.target.result;
+                    }; 
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
+
+
         canvas.addEventListener('mouseup', () => {
             isDrawing = false;
         });
 
-        const dataURL = canvas.toDataURL("image/png");
         document.querySelector('form').addEventListener('submit', (e) => {
             const canvasDataField = document.getElementById('canvasDataField');
-            canvasDataField.value = canvas.toDataURL("image/png");
+            canvasDataField.value = canvas.toDataURL("image/png", 0.5);
+        });
+
+        document.getElementById('save').addEventListener('click', function() {
+            const dataURL = canvas.toDataURL('image/png', 0.5);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataURL;
+            downloadLink.download = 'canvas_image.png';
+            downloadLink.click();
         });
 
     </script>

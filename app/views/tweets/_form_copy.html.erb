@@ -45,7 +45,7 @@
             gap: 10px;            /* ボタン間の隙間を設定 */
         }
   
-        #penTool, #eraserTool, #memoTool {
+        #penTool, #eraserTool, #memoTool, #clearCanvas {
             /* 共通のスタイルはこちらに */
             font-size: 20px; 
             padding: 10px 20px; 
@@ -102,6 +102,13 @@
             height: 100%;
             font-family: Arial, sans-serif;
         }
+
+        /* 追加するスタイル */
+        #clearCanvas {
+            background: linear-gradient(lightgray, darkgray);
+            color: white;
+        }
+
     </style>
   </head>
 
@@ -112,6 +119,7 @@
         <button id="penTool">ペン</button>
         <button id="eraserTool">消しゴム</button>
         <button id="memoTool">メモ</button>
+        <button id="clearCanvas">全て消去</button>
     </div>
 
     <!-- キャンバスを囲む枠線のdiv要素を追加 -->
@@ -214,6 +222,20 @@
             const canvasDataField = document.getElementById('canvasDataField');
             canvasDataField.value = canvas.toDataURL("image/png");
         });
+
+        document.getElementById('clearCanvas').addEventListener('click', () => {
+            // Main canvasの内容をクリア
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            // backupCanvasの内容もクリア
+            backupContext.clearRect(0, 0, backupCanvas.width, backupCanvas.height);
+            isMemoLinesVisible = false; // 罫線表示もオフにする
+            // 2. 隠しフィールドのcanvasデータをクリア
+            document.getElementById('canvasDataField').value = '';
+            
+            // 3. テキストエリアの内容をクリア
+            document.querySelector('textarea').value = '';
+        });
+
 
     </script>
 
