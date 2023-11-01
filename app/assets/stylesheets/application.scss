@@ -23,4 +23,21 @@ body {
  
 }
 
+.custom-heading {
+  position: relative;       /* 絶対ポジショニング */
+  top: 0;                   /* 上部からの位置 */
+  left: 50%;                /* 左から50%の位置に配置 */
+  transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央揃え */
+  color: blue;                   /* 文字の色 */
+  font-size: 80px;               /* 文字の大きさ */
+  font-family: "Georgia", serif; /* セリフ体のフォント */
+  border: 10px solid black;       /* 黒色の2pxの縁取り */
+  padding: 10px;                 /* ボーダーとテキストとの間のスペース */
+  display: inline-block;         /* ボーダーをテキストの幅に合わせる */
+  text-shadow: -1px -1px 0 black,   /* 左上 */
+               1px -1px 0 black,    /* 右上 */
+               -1px 1px 0 black,    /* 左下 */
+               1px 1px 0 black;     /* 右下 */
+  margin-bottom: 50px; /* 下側に50pxのマージンを追加 */            
+}
 @import "bootstrap";

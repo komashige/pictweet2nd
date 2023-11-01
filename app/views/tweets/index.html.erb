@@ -43,6 +43,20 @@
           border: 2px solid #ccc; /* 枠線の太さを2pxに */
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影を追加 */
       }
+
+      .double-size {
+          transform: scale(2.5); /* 全体の大きさを2倍にする */
+          transform-origin: top center; /* 変形の基点を中央上に設定 */
+          margin-bottom: calc(100% + 30px); /* カードの高さ + 一定のスペース (例えば30px) */
+      }
+
+      /* カード内の画像の大きさも2倍にするための追加のスタイル */
+      .double-size .card-img-top {
+          width: 100%;   /* 画像の横幅をカードの幅に合わせる */
+          height: 100%;  /* 画像の高さをカードの高さに合わせる */
+          object-fit: cover; /* 画像がコンテナの枠内に収まるように調整 */
+      }
+
  
     </style>
 
@@ -98,17 +112,17 @@
 
           <!-- これはログイン、新規登録のボタンの後に追加 -->
             <div class="row justify-content-center mt-5">
-                <div class="col-md-6">
-                    <div class="card large-card">
-                        <img src="path_to_your_image.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+              <div class="col-md-6">
+                  <div class="card large-card double-size">
+                      <% latest_tweet = @tweets.first %>
+                      <%= image_tag(latest_tweet.canvas_data) if latest_tweet&.canvas_data %>
+                      <div class="card-body">
+                          <p class="card-text"><%= latest_tweet.text if latest_tweet %></p>
+                      </div>
+                  </div>
+              </div>
             </div>
+
 
         </div>
       </div>
@@ -126,6 +140,7 @@
                 <p class="card-text text-center"><%= tweet.text %></p>
                 <div class="btn-group">
                   <% if user_signed_in? %>
+                    <button class="btn btn-info" onclick="setLargeCardData(this)">拡大表示</button>
                     <button class="btn btn-lightgreen btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       編集・削除
                     </button>
@@ -164,6 +179,32 @@
     <p class="mb-0">New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/5.2/getting-started/introduction/">getting started guide</a>.</p>
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const firstCard = document.querySelector('.card');  // 最初のカード要素を取得
+  const imageSrc = firstCard.querySelector('img').getAttribute('src');
+  const cardText = firstCard.querySelector('.card-text').textContent;
+
+  const largeCard = document.querySelector('.double-size');
+  if (imageSrc) { // イメージが存在する場合のみ、src属性をセット
+    largeCard.querySelector('img').setAttribute('src', imageSrc);
+  }
+  largeCard.querySelector('.card-text').textContent = cardText;
+});
+
+function setLargeCardData(clickedButton) {
+  // クリックされたボタンを元にカード要素を取得
+  const card = clickedButton.closest('.card');
+  const imageSrc = card.querySelector('img').getAttribute('src');
+  const cardText = card.querySelector('.card-text').textContent;
+
+  // 2倍の大きさのカード要素を取得
+  const largeCard = document.querySelector('.double-size');
+  largeCard.querySelector('img').setAttribute('src', imageSrc);
+  largeCard.querySelector('.card-text').textContent = cardText;
+}
+</script>
 
 </body>
 <html>
