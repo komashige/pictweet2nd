@@ -47,7 +47,7 @@
       .double-size {
           transform: scale(2.5); /* 全体の大きさを2倍にする */
           transform-origin: top center; /* 変形の基点を中央上に設定 */
-          margin-bottom: calc(150% + 30px); /* カードの高さ + 一定のスペース (例えば30px) */
+          margin-bottom: calc(180% + 30px); /* カードの高さ + 一定のスペース (例えば30px) */
       }
 
       /* カード内の画像の大きさも2倍にするための追加のスタイル */
@@ -136,6 +136,14 @@
                       <%= image_tag(latest_tweet.canvas_data) if latest_tweet&.canvas_data %>
                       <div class="card-body">
                           <p class="card-text"><%= latest_tweet.text if latest_tweet %></p>
+
+                          <% if latest_tweet %>
+                            <span class="name" style="font-size: 12px;">
+                                <a href="/users/<%= latest_tweet.user.id %>">
+                                  <span>投稿者</span><%= latest_tweet.user.nickname %>
+                                </a>
+                            </span>
+                          <% end %>
                       </div>
                   </div>
               </div>
@@ -156,9 +164,18 @@
               <div class="card-body">
                 
                 <p class="card-text text-center"><%= tweet.text %></p>
+
+                <span class="name">
+                 
+                    <a href="/users/<%= tweet.user.id %>">
+                      <span>投稿者</span><%= tweet.user.nickname %>
+                    </a>
+                 
+                </span>
+
                 <div class="btn-group">
-                  <% if user_signed_in? %>
-                    <button class="btn btn-info margin-right-btn" onclick="setLargeCardData(this)">拡大表示</button>
+                <button class="btn btn-info margin-right-btn" onclick="setLargeCardData(this)">拡大表示</button>
+                  <% if user_signed_in? && tweet.user_id == current_user.id %>                    
                     <button class="btn btn-lightgreen btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       編集・削除
                     </button>
@@ -178,8 +195,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                <small class="text-body-secondary"><%= tweet.created_at %></small>
-                
+                <small class="text-body-secondary"><%= tweet.created_at.strftime('%Y-%m-%d %H:%M') %></small>  
               </div>
             </div>
           </div>
@@ -225,4 +241,4 @@ function setLargeCardData(clickedButton) {
 </script>
 
 </body>
-<html>
+</html>

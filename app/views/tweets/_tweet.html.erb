@@ -1,24 +1,35 @@
-<div class="content_post" style="background-image: url(<%= tweet.image %>);">
-  <div class="more">
-    <span><%= image_tag 'arrow_top.png' %></span>
-      <ul class="more_list">
-        <li>
-          <%= link_to '詳細', tweet_path(tweet.id) %>
-        </li>
-          <% if user_signed_in? && current_user.id == tweet.user_id %>
-            <li>
-              <%= link_to '編集', edit_tweet_path(tweet.id) %>
-            </li>
-            <li>
-              <%= link_to '削除', tweet_path(tweet.id), data: { turbo_method: :delete } %>
-            </li>
-          <% end %>
-      </ul>
-    </div>
-    <p><%= tweet.text %></p>
-    <span class="name">
-      <a href="/users/<%= tweet.user.id %>">
-        <span>投稿者</span><%= tweet.user.nickname %>
-      </a>
-    </span>  
-</div>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <body>  
+    <main>
+      <div class="album py-5 bg-body-tertiary">       
+        <div class="container">
+          <%# <div class="row row-cols-1 row-cols-md-3 g-4"> %>
+            <%# @tweets.each do |tweet| %>
+              <div class="col">
+                <div class="card h-100">
+                  
+                  <!-- 画像の表示 -->
+                  <%= image_tag(tweet.canvas_data) if tweet.canvas_data %>
+                  
+                  <div class="card-body">
+                    
+                    <!-- テキストの表示 -->
+                    <p class="card-text text-center"><%= tweet.text %></p>
+                    
+                  </div>
+
+                  <!-- 日付の表示 -->
+                  <div class="card-footer">
+                    <small class="text-body-secondary"><%= tweet.created_at %></small>
+                  </div>
+
+                </div>
+              </div>
+            <%# end %>
+          <%# </div> %>
+        </div>
+      </div>
+    </main>
+  </body>  
+<html>
