@@ -57,6 +57,14 @@
           object-fit: cover; /* 画像がコンテナの枠内に収まるように調整 */
       }
 
+      /* スマートフォンやタブレットでのスタイル */
+      @media screen and (max-width: 1024px) {
+        .double-size {
+          transform: scale(1); /* 元の大きさに戻す */
+          margin-bottom: 30px; /* 元のマージンに戻す */
+        }
+      }
+
       .margin-right-btn {
           margin-right: 120px; /* 10pxのマージンを右側に追加 */
       }
@@ -80,6 +88,7 @@
 
   </head>
   <body>  
+  <div class="background-image-container"></div>
 <header data-bs-theme="dark">
   <div class="collapse text-bg-info" id="navbarHeader">
     <div class="container">

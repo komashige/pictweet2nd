@@ -1,26 +1,45 @@
-body::before {
+// body::before {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   background-image: image-url('/assets/IMG_3482.jpeg');
+//   background-repeat: no-repeat; /* 背景画像の繰り返しを阻止 */
+//   background-size: cover; /* 背景画像を全画面に合わせる */
+//   background-position: center center;
+//   background-attachment: fixed; /* 画像を固定 */
+//   height: 100vh; /* 画面の高さに合わせる */
+//   margin: 0; /* 余白を削除 */
+//   padding: 0; /* 余白を削除 */
+//   opacity: 0.3; /* 透明度を調整 */
+//   z-index: -1; /* 背景レイヤーとして配置 */
+// }
+
+/* 背景画像コンテナ用の新しいスタイル */
+.background-image-container {
   content: "";
-  position: absolute;
+  position: fixed; // スクロールしても背景が固定されるように
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: image-url('/assets/IMG_3482.jpeg');
-  background-repeat: no-repeat; /* 背景画像の繰り返しを阻止 */
-  background-size: cover; /* 背景画像を全画面に合わせる */
-  background-position: center center;
-  background-attachment: fixed; /* 画像を固定 */
-  height: 100vh; /* 画面の高さに合わせる */
-  margin: 0; /* 余白を削除 */
-  padding: 0; /* 余白を削除 */
-  opacity: 0.3; /* 透明度を調整 */
-  z-index: -1; /* 背景レイヤーとして配置 */
+  left: 50%;
+  transform: translateX(-50%); // 画面の中央に配置
+  width: 100vw;
+  max-width: 1500px; // ここで最大横幅を設定
+  height: 100vh;
+  background: url('assets/IMG_3482.jpeg') no-repeat center center / cover;
+  opacity: 0.3;
+  z-index: -1;
 }
 
 //背景画面
+/* bodyタグのスタイルを微調整 */
 body {
-  position: relative; /* 追加 */
- 
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* bodyの高さをビューポートに合わせます */
+  overflow-x: hidden; /* 横スクロールバーが出ないようにする */
 }
 
 .custom-heading {

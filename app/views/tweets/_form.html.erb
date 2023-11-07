@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>    
-
+<html lang="ja">    
   <head>
-    <%# <title>ブラウザで描画</title> %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        
           /* text_areaのスタイル */
         textarea {
             border: 10px solid green;  /* 枠線を緑色に */
@@ -32,6 +31,7 @@
         }
 
         h1 {
+            font-size: 100px;
             text-align: center;             /* タイトルを中央に配置 */
             color: #333;                    /* 文字の色を暗い灰色に変更 */
             font-family: 'Georgia', serif;  /* フォントの種類をGeorgiaに変更 */
@@ -71,6 +71,97 @@
             color: white;
         }
 
+        .pen-size {
+            position: relative; /* 子要素の絶対配置の基準に */
+            border-radius: 0%; /* ボタンの角を丸く */
+            border: 1px solid #cccccc; /* 枠線を追加 */
+            background-color: transparent; /* ボタンの背景を透明に設定 */
+            cursor: pointer; /* ホバー時のカーソルをポインターに */
+            display: inline-block; /* ボタンをインラインブロック要素として配置 */
+            margin: 1px; /* 周囲の余白 */
+            text-align: center; /* テキストを中央に配置 */
+            line-height: 50px; /* ラインの高さをボタンの高さに合わせる */
+            width: 30px; /* ボタンの幅 */
+            height: 40px; /* ボタンの高さ */
+        }
+        /* 小さいボタン用のスタイル */
+        .small-pen::after {
+            content: ''; /* 疑似要素には内容が必要なので空の内容を設定 */
+            position: absolute; /* 親要素に対して絶対配置 */
+            top: 50%; /* 上から50%の位置に */
+            left: 50%; /* 左から50%の位置に */
+            width: 4px; /* 中の円の幅 */
+            height: 4px; /* 中の円の高さ */
+            background-color: #000; /* 中の円の背景色 */
+            border-radius: 50%; /* 円形にする */
+            transform: translate(-50%, -50%); /* 中心から左と上に50%ずらす */
+        }
+        /* 中サイズのボタン用のスタイル */
+        .medium-pen::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background-color: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+         /* 大きいボタン用のスタイル */
+        .large-pen::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: #000;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .eraser-button {
+             position: relative; /* 子要素の絶対配置の基準に */
+            border-radius: 0%; /* ボタンの角を丸く */
+            border: 1px solid #cccccc; /* 枠線を追加 */
+            background-color: transparent; /* ボタンの背景を透明に設定 */
+            cursor: pointer; /* ホバー時のカーソルをポインターに */
+            display: inline-block; /* ボタンをインラインブロック要素として配置 */
+            margin: 1px; /* 周囲の余白 */
+            text-align: center; /* テキストを中央に配置 */
+            line-height: 50px; /* ラインの高さをボタンの高さに合わせる */
+            width: 30px; /* ボタンの幅 */
+            height: 40px; /* ボタンの高さ */       
+        }
+
+        /* サイズ別のスタイリング */
+        .small-eraser::before {
+            content: ''; /* 内側の円形の作成に必要 */
+            width: 10px; /* 小さい消しゴムの円のサイズ */
+            height: 10px; /* 小さい消しゴムの円のサイズ */
+            background-color: #fff; /* 内側の円の色 */
+            border: 1px solid #000; /* 黒い縁取りを追加 */
+            border-radius: 50%; /* 内側の円を円形に */
+            position: absolute; /* ボタンの中央に配置するために必要 */
+            top: 50%; /* 上から50%の位置に */
+            left: 50%; /* 左から50%の位置に */
+            transform: translate(-50%, -50%); /* 精確な中央配置のための調整 */
+        }
+
+        .large-eraser::before {
+            content: '';
+            width: 20px; /* 大サイズの消しゴムの円のサイズ */
+            height: 20px; /* 大サイズの消しゴムの円のサイズ */
+            background-color: #fff;
+            border: 1px solid #000; /* 黒い縁取りを追加 */
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
         /* 枠線のスタイルを調整 */
         .canvas-container {
           display: flex;
@@ -102,18 +193,107 @@
             height: 100%;
             font-family: Arial, sans-serif;
         }
+
+        /* モバイルデバイス（幅が768px未満の場合） */
+        @media (max-width: 767px) {
+            #drawingCanvas {
+            max-width: 100vw; /* キャンバスのサイズを変更 */
+            max-height: 100vh;
+            }
+            #toolbar button {
+            padding: 5px 10px; /* ボタンのパディングを調整 */
+            font-size: 16px; /* フォントサイズを小さく */
+            }
+            /* その他の要素も適宜調整 */
+        }
+
+        /* タブレットデバイス（幅が768px以上と1024px未満の場合） */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            #drawingCanvas {
+            max-width: 100vw; /* キャンバスのサイズを変更 */
+            max-height: 100vh;
+            }
+            #toolbar button {
+            padding: 8px 15px; /* ボタンのパディングを調整 */
+            font-size: 18px; /* フォントサイズを調整 */
+            }
+            /* その他の要素も適宜調整 */
+        }
+        /* 色選択ボタンのスタイル */
+        .button-container {
+            display: flex;
+            flex-direction: column; /* 縦に並べる */
+            align-items: center; /* 中央揃え */
+            gap: 10px; /* ボタン間の隙間 */
+        }
+        .color-button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: 2px solid #000; /* 枠線を黒色に */
+            border-radius: 5px;
+            width: 50px; /* 幅を小さめに設定 */
+            height: 50px; /* 高さを小さめに設定 */
+            margin: 5px; /* 隙間を設定 */
+            cursor: pointer;
+        }
+
+        /* 各色ごとの背景色を設定 */
+        .red { background-color: red; }
+        .orange { background-color: orange; }
+        .yellow { background-color: yellow; }
+        .green { background-color: green; }
+        .lightgreen { background-color: lightgreen; }
+        .blue { background-color: blue; }
+        .skyblue { background-color: skyblue; }
+        .purple { background-color: purple; }
+        .black { background-color: black; }
+
+        /* 太さ選択ボタンのテキストを非表示にする */
+        .pen-size::after {
+            content: ''; /* ボタン内のテキストを消すために空の内容を設定 */
+        }
+
+        /* ボタンホバー時の効果を追加 */
+        .color-button:hover,
+        .pen-size:hover,
+        .eraser-button:hover {
+            opacity: 0.8; /* ホバー時にボタンの透明度を下げる */
+        }
+
+        /* 追加スタイルが適用された状態でレイアウトを見やすくするために追加 */
+        #toolbar {
+            flex-wrap: wrap; /* ボタンが多い場合に折り返すように設定 */
+        }
+
     </style>
   </head>
 
   <body>
     <h1>ブラウザでお絵描きしよ〜</h1>
-
-    <div id="toolbar">
-        <button id="penTool">ペン</button>
-        <button id="eraserTool">消しゴム</button>
-        <button id="memoTool">メモ</button>
+    <div class="button-container">
+        <div id="toolbar">
+            <button id="penTool">ペン</button>
+            <button id="smallPen" class="pen-size small-pen"></button>
+            <button id="mediumPen" class="pen-size medium-pen"></button>
+            <button id="largePen" class="pen-size large-pen"></button>
+            <button id="eraserTool">消しゴム</button>
+            <button id="smallEraser" class="eraser-button small-eraser"></button>
+            <button id="largeEraser" class="eraser-button large-eraser"></button>
+            <button id="memoTool">メモ</button>
+        </div>
+        <div>
+            <!-- 色選択ボタン -->
+            <button class="color-button red" data-color="#FF0000"></button>
+            <button class="color-button orange" data-color="#FFA500"></button>
+            <button class="color-button yellow" data-color="#FFFF00"></button>
+            <button class="color-button green" data-color="#008000"></button>
+            <button class="color-button lightgreen" data-color="#90EE90"></button>
+            <button class="color-button blue" data-color="#0000FF"></button>
+            <button class="color-button skyblue" data-color="#87CEEB"></button>
+            <button class="color-button purple" data-color="#800080"></button>
+            <button class="color-button black" data-color="#000000"></button>
+        </div>
     </div>
-
     <!-- キャンバスを囲む枠線のdiv要素を追加 -->
     <div class="canvas-container">
         <canvas id="drawingCanvas" contenteditable="true" width="1000" height="1000"></canvas>
@@ -128,15 +308,61 @@
 
         // 描画ツールの初期設定
         let drawingTool = 'pen'; // 初期はペン
+        // 線の太さを保持する変数
+        let penSize = 2; // ペンの太さの初期値
+        let eraserSize = 8; // 消しゴムの太さの初期値
 
         // ペンツールボタンのクリックイベント
         document.getElementById('penTool').addEventListener('click', () => {
             drawingTool = 'pen';
+            context.globalCompositeOperation = 'source-over'; // ペンモードに設定
+            context.lineWidth = penSize; // ペンの太さを設定
         });
+
+        // 小さいペンのボタンクリックイベント
+        document.getElementById('smallPen').addEventListener('click', () => {
+            penSize = 2; // ペンの太さを小に設定
+            if(drawingTool === 'pen') {
+                context.lineWidth = penSize;
+            }
+        });
+
+        // 中くらいのペンのボタンクリックイベント
+        document.getElementById('mediumPen').addEventListener('click', () => {
+            penSize = 5; // ペンの太さを中に設定
+            if(drawingTool === 'pen') {
+                context.lineWidth = penSize;
+            }
+        });
+        
+        // 大きいペンのボタンクリックイベント
+        document.getElementById('largePen').addEventListener('click', () => {
+            penSize = 10; // ペンの太さを大に設定
+            if(drawingTool === 'pen') {
+                context.lineWidth = penSize;
+            }
+        });
+
 
         // 消しゴムツールボタンのクリックイベント
         document.getElementById('eraserTool').addEventListener('click', () => {
             drawingTool = 'eraser';
+            context.globalCompositeOperation = 'destination-out'; // 消しゴムモードに設定
+            context.lineWidth = eraserSize; // 消しゴムの太さを設定
+        });
+
+        document.getElementById('smallEraser').addEventListener('click', () => {
+            eraserSize = 8; // 小さい消しゴムの太さに設定
+            if(drawingTool === 'eraser') {
+                context.lineWidth = eraserSize;
+            }
+        });
+
+        document.getElementById('largeEraser').addEventListener('click', () => {
+            eraserSize = 20; // 大きい消しゴムの太さに設定
+            if(drawingTool === 'eraser') {
+                context.lineWidth = eraserSize;
+            }
         });
 
         let isMemoLinesVisible = false;  // メモの罫線が表示されているかどうかのフラグ
@@ -189,15 +415,14 @@
         });
         canvas.addEventListener('mousemove', (e) => {
             if (isDrawing) {
-                if (drawingTool === 'pen') {
-                    context.strokeStyle = 'black'; // ペンの色
-                } else if (drawingTool === 'eraser') {
-                    context.strokeStyle = 'white'; // 消しゴムは白色で塗りつぶす
-                }
-                context.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                context.lineTo(x, y);
                 context.stroke();
             }
         });
+
 
         document.addEventListener('paste', function (e) {
             // クリップボードからアイテムを取得
@@ -237,6 +462,16 @@
             downloadLink.click();
         });
 
+        // 色選択ボタンのイベントリスナーを追加
+        document.querySelectorAll('.color-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const color = this.getAttribute('data-color'); // data-color 属性から色を取得
+                context.strokeStyle = color; // 取得した色をストローク色に設定
+                if (drawingTool === 'pen') {
+                    context.globalCompositeOperation = 'source-over';
+                }
+            });
+        });
     </script>
 
 
