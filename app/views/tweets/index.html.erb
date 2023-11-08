@@ -225,28 +225,43 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const firstCard = document.querySelector('.card');  // 最初のカード要素を取得
+  // 最初のカード要素を取得
+  const firstCard = document.querySelector('.card'); 
+  // 最初のカードから情報を取得
   const imageSrc = firstCard.querySelector('img').getAttribute('src');
   const cardText = firstCard.querySelector('.card-text').textContent;
+  const userHref = firstCard.querySelector('.name a').getAttribute('href');
+  const userName = firstCard.querySelector('.name a').textContent;
 
+  // 大きなカードの要素を取得して設定
   const largeCard = document.querySelector('.double-size');
   if (imageSrc) { // イメージが存在する場合のみ、src属性をセット
     largeCard.querySelector('img').setAttribute('src', imageSrc);
   }
   largeCard.querySelector('.card-text').textContent = cardText;
+  // ユーザー情報の設定
+  largeCard.querySelector('.name a').setAttribute('href', userHref);
+  largeCard.querySelector('.name a').textContent = userName;
 });
 
 function setLargeCardData(clickedButton) {
   // クリックされたボタンを元にカード要素を取得
   const card = clickedButton.closest('.card');
+  // カードから情報を取得
   const imageSrc = card.querySelector('img').getAttribute('src');
   const cardText = card.querySelector('.card-text').textContent;
+  const userHref = card.querySelector('.name a').getAttribute('href');
+  const userName = card.querySelector('.name a').textContent;
 
-  // 2倍の大きさのカード要素を取得
+  // 2倍の大きさのカード要素を取得して設定
   const largeCard = document.querySelector('.double-size');
   largeCard.querySelector('img').setAttribute('src', imageSrc);
   largeCard.querySelector('.card-text').textContent = cardText;
+  // ユーザー情報の更新
+  largeCard.querySelector('.name a').setAttribute('href', userHref);
+  largeCard.querySelector('.name a').textContent = userName;
 }
+
 </script>
 
 </body>
