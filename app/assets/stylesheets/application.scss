@@ -43,20 +43,24 @@ body {
 }
 
 .custom-heading {
-  position: relative;       /* 絶対ポジショニング */
-  top: 0;                   /* 上部からの位置 */
-  left: 50%;                /* 左から50%の位置に配置 */
-  transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央揃え */
-  color: blue;                   /* 文字の色 */
-  font-size: 80px;               /* 文字の大きさ */
-  font-family: "Georgia", serif; /* セリフ体のフォント */
-  border: 10px solid black;       /* 黒色の2pxの縁取り */
-  padding: 10px;                 /* ボーダーとテキストとの間のスペース */
-  display: inline-block;         /* ボーダーをテキストの幅に合わせる */
-  text-shadow: -1px -1px 0 black,   /* 左上 */
-               1px -1px 0 black,    /* 右上 */
-               -1px 1px 0 black,    /* 左下 */
-               1px 1px 0 black;     /* 右下 */
-  margin-bottom: 80px; /* 下側に50pxのマージンを追加 */            
+  position: relative;                 /* 絶対ポジショニング */
+  top: 0;                             /* 上部からの位置 */
+  left: 50%;                          /* 左から50%の位置に配置 */
+  transform: translateX(-50%);        /* 要素の幅の半分だけ左に移動して中央揃え */
+  color: red;                      /* 文字の色をオレンジに */
+  font-size: 80px;                    /* 文字の大きさ */
+  font-family: "Georgia", serif;      /* セリフ体のフォント */
+  border: 10px solid;                 /* 枠線の設定 */
+  border-image: linear-gradient(to right, pink, darkpink) 1; /* 枠線にピンク色から濃いピンクへのグラデーションを適用 */
+  border-radius: 10px;                /* 枠の角を少し丸める */
+  padding: 10px;                      /* ボーダーとテキストとの間のスペース */
+  display: inline-block;              /* ボーダーをテキストの幅に合わせる */
+  background: linear-gradient(pink, orange); /* ピンクからオレンジへの背景グラデーション */
+  opacity: 0.7;                       /* 背景色を全体的に薄くする */
+  text-shadow: -1px -1px 0 black,     /* 左上 */
+               1px -1px 0 black,      /* 右上 */
+               -1px 1px 0 black,      /* 左下 */
+               1px 1px 0 black;       /* 右下 */
+  margin-bottom: 80px;                /* 下側に80pxのマージンを追加 */
 }
 @import "bootstrap";

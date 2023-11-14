@@ -10,7 +10,7 @@
             border-radius: 5px;      /* 角を少し丸く */
             padding: 5px;            /* 内側の余白を追加 */
             font-size: 16px;         /* テキストのサイズを指定 */
-            width: 30%;             /* 幅を最大に */
+            width: 100%;             /* 幅を最大に */
         }
 
         /* 送信ボタンのスタイル */
@@ -23,6 +23,7 @@
             font-size: 18px;         /* フォントサイズを指定 */
             cursor: pointer;         /* ホバー時のカーソルを手の形に */
             transition: background-color 0.3s;  /* 背景色の変化を滑らかに */
+            margin-bottom: 20px; /* 下部に20pxのスペースを追加 */
         }
 
         /* 送信ボタンをホバーしたときのスタイル */
@@ -30,14 +31,27 @@
             background-color: darkblue; /* 背景色を濃い青に */
         }
 
-        h1 {
+       h1 {
             font-size: 100px;
-            text-align: center;             /* タイトルを中央に配置 */
-            color: #333;                    /* 文字の色を暗い灰色に変更 */
-            font-family: 'Georgia', serif;  /* フォントの種類をGeorgiaに変更 */
-            margin-top: 50px;               /* 上側の間隔を50pxに設定 */
-            margin-bottom: 20px;            /* h1とツールバーとの間のスペースを設定 */
+            text-align: center;
+            color: #ff6347; /* 明るい赤色 */
+            font-family: 'クレー', sans-serif;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 0px #ffd700; /* ゴールド色のシャドウ */
+            background: linear-gradient(to bottom, #ffecd2, #fcb69f); /* 上から下へのパステルカラーのグラデーション */
+            padding: 20px; /* テキスト周りの余白を少し大きく */
+            border: 5px dashed #ff69b4; /* ピンク色の点線枠 */
+            border-radius: 20px; /* 角をより丸く */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* ソフトなボックスシャドウ */
+            display: inline-block; /* 文字の大きさに合わせた背景範囲に */
+            position: relative; /* 相対ポジショニング */
+            left: 50%; /* 左から50%の位置に */
+            transform: translateX(-50%); /* 要素の幅の半分だけ左に移動して中央揃え */
         }
+
+
+
         #toolbar {          
             display: flex;        /* Flexboxを有効化 */
             justify-content: center; /* 子要素を水平方向の中央に配置 */
@@ -83,6 +97,7 @@
             line-height: 50px; /* ラインの高さをボタンの高さに合わせる */
             width: 30px; /* ボタンの幅 */
             height: 40px; /* ボタンの高さ */
+            border-radius: 5px; /* 角を少し丸める */
         }
         /* 小さいボタン用のスタイル */
         .small-pen::after {
@@ -132,7 +147,8 @@
             text-align: center; /* テキストを中央に配置 */
             line-height: 50px; /* ラインの高さをボタンの高さに合わせる */
             width: 30px; /* ボタンの幅 */
-            height: 40px; /* ボタンの高さ */       
+            height: 40px; /* ボタンの高さ */
+            border-radius: 5px; /* 角を少し丸める */ 
         }
 
         /* サイズ別のスタイリング */
@@ -265,22 +281,73 @@
             flex-wrap: wrap; /* ボタンが多い場合に折り返すように設定 */
         }
 
+        .tool-group {
+            display: inline-flex; /* ボタンをグループごとに横に並べる */
+            flex-direction: row; /* グループ内を横に並べる */
+            align-items: center; /* グループ内の要素を中央揃えに */
+            border: 1px solid #ddd; /* グループの境界を示す */
+            padding: 5px; /* 余白を設定 */
+            margin-left: 10px; /* グループ間のスペースを設定 */
+            margin-right: 10px;
+            background-color: #e6e6e6; /* グループの背景色を設定 */
+            border-radius: 5px; /* 角を少し丸める */
+        }
+
+        .tool-header {
+            font-size: 16px; /* 見出しのサイズ */
+            font-weight: bold; /* 見出しを太字に */
+            margin-right: 5px; /* 見出しの右の余白 */
+            text-align: center; /* 見出しを中央揃えに */
+            margin-bottom: 5px; /* 見出しの下の余白 */
+            background-color: #f2f2f2; /* 見出しの背景色 */
+            padding: 5px; /* 見出しのパディング */
+            border-radius: 5px; /* 角を少し丸める */
+        }
+
+        #penTool, #eraserTool, #memoTool, .pen-size, .eraser-button {
+            /* 既存のスタイルを維持しつつ、背景色を追加 */
+            background-color: #e6e6e6; /* ボタンの背景色 */
+            /* 他のスタイルはそのまま */
+        }
+
+        /* 任意で、ホバー時の背景色の変化を追加することもできます */
+        #penTool:hover, #eraserTool:hover, #memoTool:hover, .pen-size:hover, .eraser-button:hover {
+            background-color: #cccccc; /* ホバー時の背景色 */
+        }
+
+         /* ペンと消しゴムのカーソル画像 */
+        .pen-cursor {
+        cursor: url('/Users/shigeokomatsu/Documents/鉛筆_images.jpeg'), auto;
+        }
+
+        .eraser-cursor {
+        cursor: url('/Users/shigeokomatsu/Downloads/消しゴム_images.png'), auto;
+        }
     </style>
   </head>
 
   <body>
-    <h1>ブラウザでお絵描きしよ〜</h1>
+    <h1>ブラウザでお絵描きしよ〜！</h1>
     <div class="button-container">
         <div id="toolbar">
+            <div id="toolbar">
             <button id="penTool">ペン</button>
-            <button id="smallPen" class="pen-size small-pen"></button>
-            <button id="mediumPen" class="pen-size medium-pen"></button>
-            <button id="largePen" class="pen-size large-pen"></button>
+            <div class="tool-group">
+                <div class="tool-header">線の太さ</div>
+                <button id="smallPen" class="pen-size small-pen"></button>
+                <button id="mediumPen" class="pen-size medium-pen"></button>
+                <button id="largePen" class="pen-size large-pen"></button>
+            </div>
             <button id="eraserTool">消しゴム</button>
-            <button id="smallEraser" class="eraser-button small-eraser"></button>
-            <button id="largeEraser" class="eraser-button large-eraser"></button>
+            <div class="tool-group">
+                <div class="tool-header">消しゴムの太さ</div>
+                <button id="smallEraser" class="eraser-button small-eraser"></button>
+                <button id="largeEraser" class="eraser-button large-eraser"></button>
+            </div>
             <button id="memoTool">メモ</button>
         </div>
+
+
         <div>
             <!-- 色選択ボタン -->
             <button class="color-button red" data-color="#FF0000"></button>
@@ -301,6 +368,8 @@
      
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // ここにページが完全にロードされた後に実行したいスクリプトを記述します
         // Canvas要素を取得
         const canvas = document.getElementById('drawingCanvas');
         const context = canvas.getContext('2d');
@@ -317,6 +386,7 @@
             drawingTool = 'pen';
             context.globalCompositeOperation = 'source-over'; // ペンモードに設定
             context.lineWidth = penSize; // ペンの太さを設定
+            context.strokeStyle = 'black'; // 描画色を黒に設定
         });
 
         // 小さいペンのボタンクリックイベント
@@ -472,6 +542,17 @@
                 }
             });
         });
+
+        document.getElementById('penTool').addEventListener('click', function() {
+            document.getElementById('drawingCanvas').classList.add('pen-cursor');
+            document.getElementById('drawingCanvas').classList.remove('eraser-cursor');
+        });
+
+        document.getElementById('eraserTool').addEventListener('click', function() {
+            document.getElementById('drawingCanvas').classList.add('eraser-cursor');
+            document.getElementById('drawingCanvas').classList.remove('pen-cursor');
+        });
+    });
     </script>
 
 

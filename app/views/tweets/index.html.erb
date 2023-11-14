@@ -2,12 +2,6 @@
 <html lang="en" data-bs-theme="auto">
   <head>
     <style>
-      h1.display-1 {
-        -webkit-text-stroke-width: 2px;  /* 縁取りの太さ */
-        -webkit-text-stroke-color: grey; /* 縁取りの色 */
-        font-weight: 700;  /* 文字の太さを700にする */
-      }
-
       .btn-lightgreen {
           background: linear-gradient(to bottom, #7ee081, #4cd964);
           border: 1px solid #ccc;
@@ -83,7 +77,58 @@
       .btn-info {
           background: linear-gradient(to bottom, #d7aefb, #bb86fc); /* 薄紫色のグラデーション */
       }
- 
+
+      /* 「いらすと」のスタイル */
+      .text-primary {
+        font-family: '筑紫B丸ゴシック', sans-serif; /* 筑紫B丸ゴシックを指定 */
+        font-size: 150px; /* 文字サイズを大きく */
+        font-weight: bold; /* 文字の太さを太く */
+        color: skyblue; /* 文字の色を水色に */
+        text-shadow: 3px 3px 2px yellow; /* 細い縁取りに変更 */
+      }
+
+      /* 「あるばむ」のスタイル */
+      .text-warning {
+        font-family: 'Hiragino Maru Gothic ProN', sans-serif; /* ヒラギノ丸ゴProNを指定 */
+        font-size: 130px; /* 文字サイズを大きく */
+        font-weight: bold; /* 文字の太さを太く */
+        color: yellow; /* 文字の色を黄色に */
+        text-shadow: 3px 3px 2px black; /* 細い縁取りに変更 */
+      }
+
+
+      p.lead {
+          font-family: '筑紫A丸ゴシック', sans-serif; /* 読みやすいフォントに */
+          font-size: 1.5em; /* サイズを少し大きく */
+          color: #666666; /* ソフトなグレー色に */
+          text-shadow: 1px 1px 1px black; /* 細い縁取りに変更 */
+      }
+
+      /* 拡大表示ボタンのスタイル */
+      .btn-info {
+        border-radius: 10px; /* 角を丸くする */
+        padding: 10px 20px; /* パディングを調整 */
+        font-size: 16px; /* フォントサイズを調整 */
+      }
+
+      /* 編集・削除ボタンのスタイル */
+      .btn-lightgreen {
+        border-radius: 5px; /* 角を少し丸くする */
+        padding: 5px 15px; /* パディングを調整 */
+        font-size: 14px; /* フォントサイズを調整 */
+      }
+
+      .name {
+        display: block; /* ブロック要素として表示 */
+        margin-bottom: 10px; /* 下側のマージンを設定 */
+        text-align: center; /* 中央揃え */
+        font-weight: bold; /* フォントを太字に */
+        color: #ff6600; /* 文字色（変更可能） */
+        background-color: #f8f9fa; /* 背景色（変更可能） */
+        font-family: '筑紫A丸ゴシック' , sans-serif; /* フォント（変更可能） */
+        padding: 5px; /* 内側の余白（変更可能） */
+      }
+
     </style>
 
   </head>
@@ -95,7 +140,7 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4>概要</h4>
-          <p class="text-muted">以下のアルバムについて、制作者や背景情報などの情報を簡単に追加します。数文で情報提供し、読者が有益な情報を得られるようにします。それから、ソーシャルネットワーキングサイトや連絡先情報へのリンクを提供します。</p>
+          <p class="text-muted">以下のアルバムについて、制作者や背景情報などの情報を簡単に追加します。数文で情報提供し、読者が有益な情報を得られるようにします。</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           
@@ -121,8 +166,8 @@
     <section class="py-5 text-center container">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="text-primary display-1 ">いらすと</h1>
-          <h1 class="text-warning display-1">あるばむ</h1>
+          <h1 class="text-primary">いらすと</h1>
+          <h1 class="text-warning">あるばむ</h1>
           <p class="lead text-body-black-50">自分の好きなイラストを描いたとに保存でき、アルバムのように一覧でみることができるツールです。使い方はそれ以外にもありそう！？
           </p>
           <% if user_signed_in? %>
@@ -171,17 +216,12 @@
             <div class="card h-100">
               <%= image_tag(tweet.canvas_data) if tweet.canvas_data %>
               <div class="card-body">
-                
-                <p class="card-text text-center"><%= tweet.text %></p>
-
-                <span class="name">
-                 
+                <span class="name">                 
                     <a href="/users/<%= tweet.user.id %>">
                       <span>投稿者</span><%= tweet.user.nickname %>
-                    </a>
-                 
+                    </a>                 
                 </span>
-
+                <p class="card-text text-center"><%= tweet.text %></p>
                 <div class="btn-group">
                 <button class="btn btn-info margin-right-btn" onclick="setLargeCardData(this)">拡大表示</button>
                   <% if user_signed_in? && tweet.user_id == current_user.id %>                    
@@ -260,6 +300,7 @@ function setLargeCardData(clickedButton) {
   // ユーザー情報の更新
   largeCard.querySelector('.name a').setAttribute('href', userHref);
   largeCard.querySelector('.name a').textContent = userName;
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 </script>
