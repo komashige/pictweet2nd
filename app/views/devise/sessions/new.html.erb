@@ -3,13 +3,19 @@
 <head>
     <style>
    
-    h1 {
-      text-align: center;             /* タイトルを中央に配置 */
-      color: #333;                    /* 文字の色を暗い灰色に変更 */
-      font-family: 'Georgia', serif;  /* フォントの種類をGeorgiaに変更 */
-      margin-top: 50px;               /* 上側の間隔を50pxに設定 */
-      margin-bottom: 60px;            /* h1とツールバーとの間のスペースを設定 */
-        }
+   h1 {
+        text-align: center;                           /* タイトルを中央に配置 */
+        color: #99ccff;                               /* 文字の色を薄い青色に変更 */
+        font-family: '筑紫B丸ゴシック', sans-serif;   /* フォントの種類を筑紫B丸ゴシックに変更 */
+        font-size: 60px;                              /* フォントサイズを60pxに設定 */
+        margin-top: 50px;                             /* 上側の間隔を50pxに設定 */
+        margin-bottom: 60px;                          /* h1とツールバーとの間のスペースを設定 */
+        text-shadow: 2px 2px 3px #003366;             /* 濃い青色の影を加える */
+        -webkit-text-stroke: 1px #99ccff;             /* WebKitブラウザ用の細い縁取り */
+        text-stroke: 1px #99ccff;                     /* その他のブラウザ用の細い縁取り */
+    }
+
+
 
    .input-style {
       border: 5px solid green;  /* 枠線を緑色に */
@@ -32,20 +38,23 @@
     }
 
     .actions input[type="submit"] {
-      background-color: #4CAF50; /* ボタンの背景色 */
-      color: white;              /* ボタンのテキスト色 */
-      padding: 10px 20px;        /* ボタンのパディング */
-      border: none;              /* ボーダーを非表示に */
-      border-radius: 5px;        /* ボタンの角を丸くする */
-      cursor: pointer;           /* マウスカーソルをポインタに */
-      font-size: 16px;           /* テキストのサイズ */
-      margin-top: 30px;               /* 上側の間隔を50pxに設定 */
+        background-image: linear-gradient(to bottom, #b3d9ff, #0056b3); /* 下から薄い青色から青色へのグラデーション */
+        color: yellow;                                                  /* テキストの色を黄色に */
+        padding: 10px 20px;                                             /* ボタンのパディング */
+        border: none;                                                   /* ボーダーを非表示に */
+        border-radius: 5px;                                             /* ボタンの角を丸くする */
+        cursor: pointer;                                                /* マウスカーソルをポインタに */
+        font-size: 16px;                                                /* テキストのサイズ */
+        margin-top: 30px;                                               /* 上側の間隔を設定 */
+        font-family: '筑紫A丸ゴシック', sans-serif;                     /* フォントを筑紫A丸ゴシックに設定 */
     }
 
-     /* ボタンにマウスをホバーしたときのスタイル */
+    /* ボタンにマウスをホバーしたときのスタイル */
     .actions input[type="submit"]:hover {
-      background-color: #45a049; /* ボタンの背景色を少し暗く */
+        background-image: linear-gradient(to bottom, #99c2ff, #003580); /* ホバー時に背景色を少し濃く */
     }
+
+
 
     </style>
 </head>
