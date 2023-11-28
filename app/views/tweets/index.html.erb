@@ -96,12 +96,44 @@
         text-shadow: 3px 3px 2px black; /* 細い縁取りに変更 */
       }
 
-
+      /*「タイトル」の下の説明文 */
       p.lead {
           font-family: '筑紫A丸ゴシック', sans-serif; /* 読みやすいフォントに */
           font-size: 1.5em; /* サイズを少し大きく */
           color: #666666; /* ソフトなグレー色に */
           text-shadow: 1px 1px 1px black; /* 細い縁取りに変更 */
+          background-color: rgba(255, 255, 255, 0.5); /* 半透明の白色 */
+          padding: 10px; /* テキストと背景の間に少しスペースを作る */
+          border-radius: 5px; /* 角を少し丸める */
+      }
+
+      /* メディアクエリ */
+      @media (max-width: 768px) {
+        .text-primary {
+          font-size: 100px; /* 画面が小さい時にサイズを小さく */
+        }
+
+        .text-warning {
+          font-size: 90px; /* こちらも同様に */
+        }
+
+        p.lead {
+          font-size: 1em; /* こちらも同様に */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .text-primary {
+          font-size: 80px; /* 更に小さい画面でさらに小さく */
+        }
+
+        .text-warning {
+          font-size: 70px; /* こちらも同様に */
+        }
+
+        p.lead {
+          font-size: 0.75em; /* こちらも同様に */
+        }
       }
 
       /* 拡大表示ボタンのスタイル */

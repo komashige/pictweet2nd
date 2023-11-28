@@ -196,10 +196,13 @@
         #drawingCanvas {
             background-color: white;
             display: block;
-            border: 20px solid green; /* 枠線の色を緑色にする */
             border-radius: 10px; /* 枠線の角をより丸める */
             margin: 20px; /* ボタンとの間に隙間を作成 */
             align-items: center;
+            position: relative;
+            box-shadow: 0 0 0 20px #ffd700, /* 明るい金色 */
+                        0 0 0 21px #d4af37, /* 暗めの金色 */
+                        0 0 0 22px #ffd700; /* 再び明るい金色 */
         }
 
         /* 画面全体に対するスタイルを調整 */
