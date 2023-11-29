@@ -150,6 +150,7 @@
         font-size: 14px; /* フォントサイズを調整 */
       }
 
+       /* 投稿者のニックネーム文字表記 */
       .name {
         display: block; /* ブロック要素として表示 */
         margin-bottom: 10px; /* 下側のマージンを設定 */
@@ -160,6 +161,16 @@
         font-family: '筑紫A丸ゴシック' , sans-serif; /* フォント（変更可能） */
         padding: 5px; /* 内側の余白（変更可能） */
       }
+      /* トップページにログインしたユーサーのニックネーム */
+      .user-nickname {
+        font-family: '筑紫B丸ゴシック', sans-serif; /* 筑紫B丸ゴシックフォント */
+        color: yellow; /* 文字色 */
+        text-shadow: 2px 2px darkyellow; /* 濃い黄色の影 */
+        -webkit-text-stroke: 1px black; /* 細い縁取り（主にWebkitブラウザ向け） */
+        font-size: 40px; /* 文字サイズ */
+        font-weight: bold; /* 文字の太さを太く */
+      }
+
 
     </style>
 
@@ -186,6 +197,14 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <strong>いらすとあるばむ</strong>
       </a>
+       <!-- ログインユーザーのニックネーム表示 -->
+      <div class="navbar-text ml-auto user-nickname">
+        <% if user_signed_in? %>
+          <%= current_user.nickname %>さんがログイン中です！
+        <% else %>
+          ログインしてください！
+        <% end %>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -224,7 +243,7 @@
                           <p class="card-text"><%= latest_tweet.text if latest_tweet %></p>
 
                           <% if latest_tweet %>
-                            <span class="name" style="font-size: 12px;">
+                            <span class="name" style="font-size: 15px;">
                                 <a href="/users/<%= latest_tweet.user.id %>">
                                   <span>投稿者</span><%= latest_tweet.user.nickname %>
                                 </a>
