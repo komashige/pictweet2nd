@@ -5,14 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         
-          /* text_areaのスタイル */
-        textarea {
-            border: 10px solid green;  /* 枠線を緑色に */
-            border-radius: 5px;      /* 角を少し丸く */
-            padding: 5px;            /* 内側の余白を追加 */
-            font-size: 16px;         /* テキストのサイズを指定 */
-            width: 100%;             /* 幅を最大に */
-        }
+        
 
         /* 送信ボタンのスタイル */
         input[type="submit"] {
@@ -39,6 +32,7 @@
             margin-top: 50px;               /* 上側の間隔を50pxに設定 */
             margin-bottom: 20px;            /* h1とツールバーとの間のスペースを設定 */
         }
+
         #toolbar {          
             display: flex;        /* Flexboxを有効化 */
             justify-content: center; /* 子要素を水平方向の中央に配置 */
@@ -72,6 +66,12 @@
             color: white;
         }
 
+        #clearCanvas {
+            background: linear-gradient(lightgray, gray); /* ここで背景のグラデーションを設定 */
+            color: black; /* 文字色を設定 */
+        }
+
+
         /* 枠線のスタイルを調整 */
         .canvas-container {
           display: flex;
@@ -79,6 +79,21 @@
           justify-content: center;
          
         }
+        .textarea-container {
+            width: 80%; /* キャンバスの幅の80% */
+            margin-top: 20px; /* キャンバスとの間隔 */
+            display: flex;
+            justify-content: center; /* 中央に配置 */
+        }
+
+        .custom-textarea {
+            border: 10px solid green;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 16px;
+            width: 100%; /* 親コンテナの幅に合わせる */
+        }
+
          /* フォームのスタイルを調整 */
         form {
             text-align: center;
@@ -328,7 +343,6 @@
   <body>
     <div class="button-container">
         <div id="toolbar">
-            <div id="toolbar">
             <button id="penTool">ペン</button>
             <div class="tool-group">
                 <div class="tool-header">線の太さ</div>
@@ -343,7 +357,9 @@
                 <button id="largeEraser" class="eraser-button large-eraser"></button>
             </div>
             <button id="memoTool">メモ</button>
+            <button id="clearCanvas">クリア</button> <!-- ここにクリアボタンを追加 -->
         </div>
+
         <div>
             <!-- 色選択ボタン -->
             <button class="color-button red" data-color="#FF0000"></button>
@@ -362,7 +378,6 @@
     <div class="canvas-container">
         <canvas id="drawingCanvas" width="1000" height="1000"></canvas>
     </div>
-     
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -373,16 +388,24 @@
 
         // 描画ツールの初期設定
         let drawingTool = 'pen'; // 初期はペン
+        let currentPenColor = 'black'; // 初期色を黒に設定
         // 線の太さを保持する変数
         let penSize = 2; // ペンの太さの初期値
         let eraserSize = 8; // 消しゴムの太さの初期値
+
+        // 色選択ボタンのイベントリスナー
+        document.querySelectorAll('.color-button').forEach(button => {
+            button.addEventListener('click', function() {
+                currentPenColor = this.getAttribute('data-color');
+            });
+        });
 
         // ペンツールボタンのクリックイベント
         document.getElementById('penTool').addEventListener('click', () => {
             drawingTool = 'pen';
             context.globalCompositeOperation = 'source-over'; // ペンモードに設定
             context.lineWidth = penSize; // ペンの太さを設定
-            context.strokeStyle = 'black'; // 描画色を黒に設定
+            //context.strokeStyle = 'black'; // 描画色を黒に設定
         });
 
         // 小さいペンのボタンクリックイベント
@@ -486,10 +509,11 @@
             context.beginPath();
             context.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
         });
+
         canvas.addEventListener('mousemove', (e) => {
             if (isDrawing) {
                 if (drawingTool === 'pen') {
-                    context.strokeStyle = 'black'; // ペンの色
+                    context.strokeStyle = currentPenColor; // 選択されたペンの色
                 } else if (drawingTool === 'eraser') {
                     context.strokeStyle = 'white'; // 消しゴムは白色で塗りつぶす
                 }
@@ -534,9 +558,14 @@
 
 
     <%= form_with(model: tweet, data: { turbo: false }, local: true) do |form| %>
-      <%= form.hidden_field :canvas_data, id: "canvasDataField" %>
-      <%= form.text_area :text, placeholder: "コメントしてね〜", rows: "10" %>
-      <%= form.submit "保存するよ〜" %>
+        <%= form.hidden_field :canvas_data, id: "canvasDataField" %>
+
+        <div class="textarea-container">
+            <%= form.text_area :text, placeholder: "コメントしてね〜", rows: "10", class: "custom-textarea" %>
+        </div>
+
+        <%= form.submit "保存するよ〜" %>
     <% end %>
+
   </body>
 </html>

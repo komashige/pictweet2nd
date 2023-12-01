@@ -41,7 +41,7 @@
             text-shadow: 4px 4px 0px #ffd700; /* ゴールド色のシャドウ */
             background: linear-gradient(to bottom, #ffecd2, #fcb69f); /* 上から下へのパステルカラーのグラデーション */
             padding: 20px; /* テキスト周りの余白を少し大きく */
-            border: 5px dashed #ff69b4; /* ピンク色の点線枠 */
+            border: 2px solid #ff69b4; /* ピンク色の実線枠 */
             border-radius: 20px; /* 角をより丸く */
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* ソフトなボックスシャドウ */
             display: inline-block; /* 文字の大きさに合わせた背景範囲に */
@@ -384,12 +384,20 @@
         let penSize = 2; // ペンの太さの初期値
         let eraserSize = 8; // 消しゴムの太さの初期値
 
+        // 色選択ボタンにイベントリスナーを追加
+        document.querySelectorAll('.color-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                context.strokeStyle = color; // 描画色を選択された色に設定
+            });
+        });
+
         // ペンツールボタンのクリックイベント
         document.getElementById('penTool').addEventListener('click', () => {
             drawingTool = 'pen';
             context.globalCompositeOperation = 'source-over'; // ペンモードに設定
             context.lineWidth = penSize; // ペンの太さを設定
-            context.strokeStyle = 'black'; // 描画色を黒に設定
+            //context.strokeStyle = 'black'; // 描画色を黒に設定
         });
 
         // 小さいペンのボタンクリックイベント
