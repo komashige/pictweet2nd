@@ -100,3 +100,5 @@ gem 'gon'
 group :development do
   gem 'rubocop', require: false
 end
+
+gem 'mini_racer'

@@ -4,9 +4,15 @@
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+          /* text_areaのスタイル */
+        textarea {
+            border: 10px solid green;  /* 枠線を緑色に */
+            border-radius: 5px;      /* 角を少し丸く */
+            padding: 5px;            /* 内側の余白を追加 */
+            font-size: 16px;         /* テキストのサイズを指定 */
+            width: 100%;             /* 幅を最大に */
+        }
         
-        
-
         /* 送信ボタンのスタイル */
         input[type="submit"] {
             background: linear-gradient(pink, red);  /* 背景色を青に */
@@ -66,21 +72,21 @@
             color: white;
         }
 
+         /* 追加するスタイル */
         #clearCanvas {
-            background: linear-gradient(lightgray, gray); /* ここで背景のグラデーションを設定 */
-            color: black; /* 文字色を設定 */
+            background: linear-gradient(lightgray, darkgray);
+            color: white;
         }
-
 
         /* 枠線のスタイルを調整 */
         .canvas-container {
           display: flex;
           align-items: center;
-          justify-content: center;
-         
+          justify-content: center;        
         }
+
         .textarea-container {
-            width: 80%; /* キャンバスの幅の80% */
+            width: 50%; /* キャンバスの幅の80% */
             margin-top: 20px; /* キャンバスとの間隔 */
             display: flex;
             justify-content: center; /* 中央に配置 */
@@ -97,7 +103,7 @@
          /* フォームのスタイルを調整 */
         form {
             text-align: center;
-            margin-top: 0px; /* フォームとボタンの間のスペースを設定 */
+            margin-top: 10px; /* フォームとボタンの間のスペースを設定 */
         }
        
 
@@ -112,22 +118,7 @@
             box-shadow: 0 0 0 20px #ffd700, /* 明るい金色 */
                         0 0 0 21px #d4af37, /* 暗めの金色 */
                         0 0 0 22px #ffd700; /* 再び明るい金色 */
-        }
-
-
-        /* 画面全体に対するスタイルを調整 */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
-
-        /* 追加するスタイル */
-        #clearCanvas {
-            background: linear-gradient(lightgray, darkgray);
-            color: white;
-        }
+        }       
 
         .pen-size {
             position: relative; /* 子要素の絶対配置の基準に */
@@ -330,11 +321,11 @@
 
         /* ペンと消しゴムのカーソル画像 */
         .pen-cursor {
-        cursor: url('/Users/shigeokomatsu/Documents/鉛筆_images.jpeg'), auto;
+        cursor: url('app/assets/images/鉛筆２_images.png'), auto;
         }
 
         .eraser-cursor {
-        cursor: url('/Users/shigeokomatsu/Downloads/消しゴム_images.png'), auto;
+        cursor: url('app/assets/images/消しゴム２_images.png'), auto;
         }
 
     </style>
